@@ -526,6 +526,7 @@
 
 
 
+
 Here was the initial plan. In the end, the last topic was not covered.
 \begin{enumerate} [label = (\arabic*)]
     \item Review of Gromov--Witten theory
@@ -1005,15 +1006,27 @@ There exists a unique isomorphism of maximal F-bundles between $(\tilde \rH, \ti
 
 Here, the goal is to relate F-bundles with motives. We will work with three different fields. First, $K$ is any field; we will work with varieties over $K$. Then we consider $k$, which has characteristic $0$; it will be the coefficient field of the cohomology theory (e.g., $\bQ$ is fine). Finally, we will consider an algebraically closed nonarchimedean field, $\bk$. 
 
-Let $\cC$ be a semisimple neutral Tannakian category over $k$, so that $\cC = \mathrm{Rep}(G)$, for $G$ a pro-reductive group. Assume that $G$ has a central element $\epsilon \in G$ of order $2$. Let $\rH^*$ be a Weil cohomology theory of projective $K$-varieties, taking values in $\cC$, satisfying a \emph{Mumford--Tate normalization} condition: 
+Let $\cC$ be a semisimple neutral Tannakian category over $k$, so that $\cC = \mathrm{Rep}(G)$, for $G$ a pro-reductive group. Assume that $G$ has a central element $\epsilon \in G$ of order $2$. Let $\rH^*$ be a Weil cohomology theory of projective $K$-varieties, taking values in $\cC$, satisfying the \emph{Mumford--Tate normalization} conditions: 
 \begin{enumerate} [label = (\arabic*)]
     \item If $\rH^2(\bP^1)$ is a trivial rank $1$ $G$-module. 
-    \item For any smooth, projective $K$-variety $X$ and any $i \in \bZ$, $\epsilon$ acts on $\rH^i(X)$ by $(-1)^i$.
+    \item \label{item:epsilon} For any smooth, projective $K$-variety $X$ and any $i \in \bZ$, $\epsilon$ acts on $\rH^i(X)$ by $(-1)^i$.
 \end{enumerate}
 
 \begin{example}
 \label{ex:mumford-tate}
-    Let $k = \bQ$, $\cC_0$ be the category of pure, polarizable $\bQ$-Hodge structures. Then $\cC_0 = \mathrm{Rep}(G_0)$, where $G_0$ is the Mumford--Tate group. There is a natural homomorphism from $G_0$ to $\bG_m$ corresponding to the action of $G_0$ on $\rH^2(\bP^1)$; the kernel $G$ satisfies the conditions above. Then $\epsilon$ comes from the Deligne torus. 
+    Let $k = \bQ$, $\cC_0$ be the category of pure, polarizable $\bQ$-Hodge structures. Then $\cC_0 = \mathrm{Rep}(G_0)$, where $G_0$ is the Mumford--Tate group. 
+
+    The action of $G_0$ on $\rH^2(\bP^1)$ gives a homomorphism
+    \[
+        G_0 \to \bG_m.
+    \]
+    If $G$ is the fiber over $1 \in \bG_m$, then $G$ satisfies the Mumford-Tate normalization conditions. Indeed, to check \Cref{item:epsilon}, recall that $G_0$ contains the Deligne torus 
+    \[
+        \bS \to G_{0, \bR}.
+    \]
+    The real points $\bS(\bR)$ are naturally isomorphic to the group $\bC^\times$, and the inclusion $\bR^\times \to \bC^\times$ in fact corresponds to a morphism of group schemes $\bG_{m, \bR} \to \bS$. 
+
+    The resulting homomorphism $w:\bG_{m, \bR} \to G_{0, \bR}$ corresponds to the $\bZ$-grading of a Hodge structure by weight. Since the decomposition of a pure Hodge structure into weights is defined over $\bQ$, we see that $w$ descends to a homomorphism $\bG_{m, \bQ} \to G_0$. The image of $-1$ maps into $G \subset G_0$, and acts on the weight $n$ part of a given Hodge structure as $(-1)^n$. 
 \end{example}
 
 \begin{example}
@@ -1021,7 +1034,7 @@ Let $\cC$ be a semisimple neutral Tannakian category over $k$, so that $\cC = \m
     One can take $C = \mathrm{Rep}(G)$ to be Andre's category of motivated cycles (so $\rH^*(X)^G$ is the subgroup spanned by motivated cycles).
 \end{example}
 
-\subsection{The general cubic fourfold is irrational}
+\subsection{The very general cubic fourfold is irrational}
 
 \begin{definition}
 Let $B$ be the germ of a smooth $\bk$-analytic space at a rigid point (a point corresponding to a maximal ideal). A $G$-equivariant maximal $F$-bundle is called a $G$-atom if the action by the Euler field $\euler$ has a single eigenvalue. ($\euler$ is the residue of the second order pole of the connection.)
@@ -1029,7 +1042,7 @@ Let $B$ be the germ of a smooth $\bk$-analytic space at a rigid point (a point c
 Two $G$-atoms are \emph{equivalent} if they come from a $G$-equivariant $F$-bundle over a connected base (a connected smooth $\bk$-analytic space).
 \end{definition}
 
-For any $G$-equivariant maximal F-bundle $(H, \nabla)/B$, then we consider the locus $B_0 \subset B^G$ where the number of distinct eigenvalues of $\euler$ is maximal. Finally, we apply \Cref{thm:nonarch_dec_thm}: Consider the finite \'etale covering $\bB \to B_0$. Then each connected component of $\bB$ gives an equivalence class of $G$-atom. 
+For any $G$-equivariant maximal F-bundle $(\rH, \nabla)/B$, then we consider the locus $B_0 \subset B^G$ where the number of distinct eigenvalues of $\euler$ is maximal. Finally, we apply \Cref{thm:nonarch_dec_thm}: Consider the finite \'etale covering $\bB \to B_0$. Then each connected component of $\bB$ gives an equivalence class of $G$-atom. 
 
 We will ultimately look at a coarser invariant. Each $G$-atom gives an isomorphism class of finite-dimensional $G$-representation. 
 
@@ -1053,8 +1066,8 @@ To emphasize, this is a sum of multisets. It just means that elements of the mul
     If $K_X$ is nef, then $\Atoms(X)$ is a singleton. 
 \end{theorem}
 
-Consider a general cubic $4$-fold. 
-Here, general means that $\rH^4_{\prim}(X)$ does not contain any Hodge classes; we will show that all of these are irrational.
+Consider a very general cubic $4$-fold. 
+Here, very general means that $\rH^4_{\prim}(X)$ does not contain any Hodge classes; we will show that all of these are irrational.
 The Hodge diamond of $X$ has the following form:
 \[
     \underbrace{\begin{array}{ccc}
