@@ -31,6 +31,7 @@
 \usepackage{stmaryrd}
 \usepackage{appendix}
 \usepackage{indentfirst}
+\usepackage{cleveref}
 
 %added by James
 \usepackage{tikz-cd}
@@ -288,7 +289,7 @@
 \newcommand{\length}{\ell}
 \newcommand{\KU}{\mathrm{KU}}
 \newcommand{\gr}{\mathrm{gr}}
-\newcommand{\Atom}{\mathrm{Atom}}
+\newcommand{\Atoms}{\mathrm{Atoms}}
 
 %added in November
 \newcommand{\bmu}{\bm{\mu}}
@@ -499,15 +500,15 @@
 
 \title{F-bundles and blowups}
 
-\author{Notes on a series of talks by Tony Yue Yu \\
-James Hotchkiss}
+\author{Tony Yue Yu \\
+Notes by James Hotchkiss}
 
 %\thanks{A.P. was partially supported by NSF grants DMS-2112747, DMS-2052750, and DMS-2143271, and a Sloan Research Fellowship.} 
 
 %\date{\today}
 
 \begin{abstract}
-    From the abstract: ``I will discuss the basic ideas and properties of F-bundles and non-commutative Hodge structures, as well as applications to birational geometry. Joint work with Katzarkov, Kontsevich and Pantev.'' 
+    ``I will discuss the basic ideas and properties of F-bundles and non-commutative Hodge structures, as well as applications to birational geometry. Joint work with Katzarkov, Kontsevich and Pantev.'' 
 \end{abstract}
 
 \maketitle
@@ -520,7 +521,7 @@ James Hotchkiss}
 
 
 
-Outline:
+Here was the initial plan. In the end, the last topic was not covered.
 \begin{enumerate} [label = (\arabic*)]
     \item Review of Gromov--Witten theory
     \item nc-Hodge structures and mirror symmetry
@@ -545,10 +546,11 @@ For the time being, we work with smooth, projective varieties over $\bC$.
     \[
         N_d = 1, 1, 12, 620, 87304, 26312976, 14616808192, \dots
     \]
-    Some of the numbers are classical, but it turns out that in general, one may compute them using Kontsevich's recursive formula:
+    The first few numbers are classical, but it turns out that in general, one may compute them using Kontsevich's recursive formula:
     \[
-        N_d = \sum_{d_1 + d_2} N_{d_1} N_{d_2} d_1^2d_2 \left(\binom{3d - 4}{3d_1 - 2} - d_1 \binom{3d - 4}{3d_1 - 1} \right) .
+        N_d = \sum_{d_1 + d_2 = d} N_{d_1} N_{d_2} d_1^2d_2 \left(\binom{3d - 4}{3d_1 - 2} - d_1 \binom{3d - 4}{3d_1 - 1} \right) .
     \]
+    The formula doesn't look symmetric in $d_1$ and $d_2$, but it turns out to be.
 \end{example}
 To set up any curve-counting theory, there are two issues to take care of:
 \begin{enumerate} [label = (\arabic*)]
@@ -565,47 +567,47 @@ Consider maps
 \]
 where $(C, p_1, \dots, p_n)$ is an $n$-pointed proper nodal curve, and the automorphism group $\Aut(f)$ is required to be finite. Such a map is called a \emph{stable map}.
 
-The moduli stack $\bar{\cM} = \bar{\cM}_{g, n}(X, \beta)$ of genus $g$ stable maps to $X$, where $f_* [C] = \beta \in \rH_2(X, \bZ)$. The expected dimension of $\bar{\cM}$ is 
+We consider the moduli stack $\bar{\cM} = \bar{\cM}_{g, n}(X, \beta)$ of genus $g$ stable maps to $X$, where $f_* [C] = \beta \in \rH_2(X, \bZ)$. It turns out that $\bar{\cM}$ is a proper DM stack. The expected dimension of $\bar{\cM}$ is 
 \[
     \vdim(\bar{\cM}) = (1 - g)(\dim X - 3) + \int_{\beta} c_1(T_X) + n.
 \]
-Then $\bar{\cM}$ carries a virtual fundamental class $[\bar \cM]^{\vir}$ in $\CH_{\vdim}(\bar{\cM})$.
+Then $\bar{\cM}$ carries a virtual fundamental class $[\bar \cM]^{\vir}$ in $\CH_{\vdim}(\bar{\cM}, \bQ)$.
 
 \subsection*{Rational Gromov--Witten invariants}
-Let $\phi_i \in \rH^2(X, \bQ)$. Define 
+Let $\phi_i \in \rH^*(X, \bQ)$. Define 
 \[
     \langle \phi_1, \dots, \phi_n \rangle_\beta = \int_{[\bar \cM]^\vir} \prod_{i = 1}^n \ev_i^* \phi_i \in \bQ,
 \]
 where $\ev_i:\bar\cM \to X$ is the evaluation at $p_i$. 
 These numbers satisfy a number of interesting properties:
 \begin{enumerate} [label = (\arabic*)]
-    \item Symmetry: $\langle \phi_{\sigma_1}, \dots, \phi_{\sigma_n} \rangle_{\beta} = (-1)^{\sigma} \langle \phi_1, \dots, \phi_n \rangle_\beta$.
+    \item Symmetry: $\langle \phi_{\sigma_1}, \dots, \phi_{\sigma_n} \rangle_{\beta} = \mathrm{sgn}(\sigma) \langle \phi_1, \dots, \phi_n \rangle_\beta$, for a permutation $\sigma$.
     \item Support: $\langle \phi_1, \dots, \phi_n \rangle_\beta \neq 0$ implies that $\beta = 0$ or $\beta$ is an effective curve class.
-    \item Constant maps: $\langle \phi_1, \dots, \phi_n \rangle_0 \neq 0$ implies that $n = 3$, and
+    \item Constant maps: $\langle \phi_1, \dots, \phi_n \rangle_0 \neq 0$ implies that $n = 3$ and
     \[
          \langle \phi_1, \phi_2, \phi_3 \rangle_0 = \int_{[X]} \phi_1 \cup \phi_2 \cup \phi_2.
     \]
     \item Dimension: $\langle \phi_1, \dots, \phi_n \rangle_\beta \neq 0$ implies $\sum \deg \phi_i = 2 \vdim$.
     \item Unit: $\langle 1_X, \phi_2 \dots, \phi_n \rangle_\beta  =0$ if $\beta \neq 0$.
-    \item Divisor: $\langle \phi_1, \dots, \phi_n, \phi_{n + 1} \rangle_\beta = \langle \phi_1, \dots, \phi_n \rangle_\beta \cdot \int_{\beta} \phi_{n + 1}$ if $\deg \phi_{n + 1}$ and $n \geq 3$.
+    \item Divisor: $\langle \phi_1, \dots, \phi_n, \phi_{n + 1} \rangle_\beta = \langle \phi_1, \dots, \phi_n \rangle_\beta \cdot \int_{\beta} \phi_{n + 1}$ if $\deg \phi_{n + 1} = 2$ and $n \geq 3$.
     \item WDVV: 
     \begin{equation*}
         \sum_{\beta' + \beta'' = \beta} \quad  \sum_{I' \cup I'' = \{5, \dots, n\}} \sum_i \langle \phi_1,\phi_2,\phi_{I'}, T_i \rangle_{\beta'} \cdot \langle \phi_5,\phi_4,\phi_{I''}, T^i \rangle_{\beta''} 
     \end{equation*}
-    is symmetry under swapping $\phi_2$ and $\phi_3$. Here, $T_i$ and $T^i$ are dual bases of $\rH^*(X, \bQ)$.
+    is symmetric under swapping $\phi_2$ and $\phi_3$. Here, $T_i$ and $T^i$ are dual bases of $\rH^*(X, \bQ)$.
 \end{enumerate}
 
 \subsection*{Gromov--Witten potential} 
 Choose a basis $T_i$ of $\rH^*(X, \bQ)$. The \emph{Gromov--Witten potential} is given by
 \[
-    \Phi = \sum_{n \geq 0, \beta} \frac{q^{\beta}}{n!} \sum_{i_1, \dots, i_n} \langle T_{i_1}, \dots, T_{i_n} \rangle_{\beta} \in \bQ[[\mathrm{NE}(X, \bZ)]][[\{t_i\}]].
+    \Phi = \sum_{n \geq 0, \beta} \frac{q^{\beta}}{n!} \sum_{i_1, \dots, i_n} \langle T_{i_1}, \dots, T_{i_n} \rangle_{\beta} \cdot t_{i_1} \cdots t_{i_n} \in \bQ\llbracket \mathrm{NE}(X, \bZ)\rrbracket \llbracket\{t_i\} \rrbracket.
 \]
-We denote the coefficient ring by $R$. 
+We denote the coefficient ring by $R$.
 The potential leads to the quantum product
 \[
-    H \otimes H \to H \otimes R, \quad T_i \star T_j := \sum_k \frac{\partial^3 \Phi}{\partial t_i \partial t_j \partial k} T^k.
+    \rH \otimes \rH \to \rH \otimes R, \quad T_i \star T_j := \sum_k \frac{\partial^3 \Phi}{\partial t_i \partial t_j \partial k} T^k,
 \]
-Then WDVV implies that $\star$ is associative. 
+where $\rH = \rH^*(X, \bZ)$. Then WDVV implies that $\star$ is associative. 
 In fact, WDVV is equivalent to the associativity of the quantum product.
 
 \begin{conjecture}
@@ -620,24 +622,24 @@ In fact, WDVV is equivalent to the associativity of the quantum product.
 \section{nc-Hodge structures and mirror symmetry} % (fold)
 \label{sec:nc_hodge_structures_and_mirror_symmetry}
 
-\subsection*{nc-Hodge structures} We package Gromov--Witten theory further, with the goal of bringing in ideas from mirror symmetry. A reference for some of the following material is \cite{MR2483750}.
+\subsection*{nc-Hodge structures} We package Gromov--Witten theory further into some differential-geometric data, with the goal of bringing in ideas from mirror symmetry. 
 
 \begin{definition}
 \label{def:nc_hodge}
-    A \emph{rational pure nc-Hodge structure} consists of a tuple $(H, E_B, \mathrm{iso})$, where:
+    A \emph{rational pure nc-Hodge structure} consists of a tuple $(\rH, \cE_B, \mathrm{iso})$, where:
     \begin{itemize}
-        \item $H$ is a $\bZ/2$-graded algebraic vector bundle on $\bA^1$ with coordinate $u$,
-        \item $E_B$ is a local system of finite-dimensional $\bQ$-vector spaces on $\bA^1 - 0$,
+        \item $\rH$ is a $\bZ/2$-graded algebraic vector bundle on $\bA^1$ with coordinate $u$,
+        \item $\cE_B$ is a local system of finite-dimensional $\bQ$-vector spaces on $\bA^1 - 0$,
         \item $\mathrm{iso}$ is an isomorphism
         \[
-            E_B \simeq \cO_{\bA^1 - 0}^{\an} \simeq H^{\an}|_{\bA^1 - 0},
+            \cE_B \simeq \cO_{\bA^1 - 0}^{\an} \simeq \rH^{\an}|_{\bA^1 - 0},
         \]
-        so that $H^{\an}$ inherits a flat holomorphic connection $\nabla$ on $\bA^1 - 0$.
+        so that $\rH^{\an}$ inherits a flat holomorphic connection $\nabla$ on $\bA^1 - 0$.
     \end{itemize}
-    such that the following conditions hold:
+    These are required to satisfy the following conditions:
     \begin{enumerate} [label = (\arabic*)]
-        \item nc-filtration axiom: $\nabla$ is meromorphic on $H$ with a pole of order $\leq 2$ at $ u = 0$, and a regular singularity at $\infty$.
-        \item $\bQ$-structure axiom: $\cE_B$ is compatible with Stokes data. 
+        \item nc-filtration axiom: $\nabla$ is a meromorphic connection on $\rH$ with a pole of order $\leq 2$ at $ u = 0$, and a regular singularity at $\infty$.
+        \item $\bQ$-structure axiom: $\cE_B$ is compatible with ``Stokes data.'' 
         \item Opposedness axiom (omitted).
     \end{enumerate}
 \end{definition}
@@ -645,13 +647,14 @@ In fact, WDVV is equivalent to the associativity of the quantum product.
 \begin{example}[Classical Hodge structures ]
     Let $(V, \rF^\bullet V, V_{\bQ})$ be a pure $\bQ$-Hodge structure of weight $w$. Then the corresponding nc-Hodge structure is given as follows:
     \begin{itemize}
-        \item $H = \sum u^{-1} \rF^i V[u]$, considered as a submodule of $\bC[u,u^{-1}] \otimes V$.
+        \item $\rH = \sum u^{-1} \rF^i V[u]$, considered as a submodule of $\bC[u,u^{-1}] \otimes V$.
         \item The connection is given by 
         \[
             \nabla = d - \frac{w}{2} \frac{du}{u}.
         \]
-        \item The local system is the extension of $V_{\bQ}$, which we think of as a vector subspace of the fiber of $H$ at $1 \in \bA^1$, to a local system in $H$ by parallel transport.
+        \item The local system is the extension of $V_{\bQ}$, which we think of as a vector subspace of the fiber of $\rH$ at $1 \in \bA^1$, to a $\bQ$-local system in $\rH^\an|_{\bA^1 - 0}$ by parallel transport.
     \end{itemize}
+    In this example, the pole at $0$ has order $1$.
 \end{example}
 
 In general, meromorphic connections with poles of order $2$ are difficult, so we focus instead on a class where the pole is reasonable:
@@ -669,11 +672,11 @@ In general, meromorphic connections with poles of order $2$ are difficult, so we
 \subsection*{Variation of nc-Hodge structures}
 There is a notion of a variation of nc-Hodge structure. We omit the precise definition. Suffice it to say that the definition consists of the following ingredients:
 \begin{itemize}
-    \item A $\bZ/2$-graded vector bundle on $\bA^1 \times B$, which is algebraic in the $\bA^1$ direction.
-    \item A local system $E_B$ of $\bZ/2$-graded vector spaces on $\bG_m \times B$.
+    \item A $\bZ/2$-graded vector bundle $\rH$ on $\bA^1 \times B$, which is algebraic in the $\bA^1$ direction.
+    \item A local system $\cE_B$ of $\bZ/2$-graded vector spaces on $\bG_m \times B$.
     \item An isomorphism 
     \[
-        \mathrm{iso}:E_B \otimes \cO_{\bG_m \times S} \simeq H_{\bG_m \times S},
+        \mathrm{iso}:\cE_B \otimes \cO_{(\bA^1 - 0) \times S} \simeq \rH|_{(\bA^1 - 0) \times S},
     \]
 \end{itemize}
 satisfying several conditions:
@@ -686,9 +689,10 @@ satisfying several conditions:
 
 
 \subsection*{A-model nc-Hodge structure}
+We explain how Gromov--Witten invariants give rise to a variation of nc-Hodge structure.
 
-Let $B = \Spf(\bQ[[\mathrm{NE}(X, \bZ)]][[\{t_i\}]])$, which serves as the base of the variation.
-Let $H$ be the trivial bundle over $B \times \bA^1_u$ with fiber $\rH= \rH^*(X, \bQ)$. We take $\nabla$ to be the \emph{quantum connection}:
+Let $B = \Spf(\bQ\llbracket \mathrm{NE}(X, \bZ)\rrbracket\llbracket\{t_i\}\rrbracket)$, which serves as the base of the variation.
+Let $\rH$ be the trivial bundle over $B \times \bA^1_u$ with fiber $\rH= \rH^*(X, \bQ)$. We take $\nabla$ to be the \emph{quantum connection}:
 \begin{equation*}
     \nabla = \begin{cases}
         \nabla_{\partial_u} = \partial_u + \frac{1}{u^2} K + \frac{1}{u} G \\
@@ -709,7 +713,7 @@ These operators preserve the $\bZ/2$-grading.
     $(H, \nabla)$ has exponential type. 
 \end{conjecture}
 
-Let us assume convergence (Conjecture~\ref{conj:convergence}), and explain some of the other aspects of the (conjectural) variation. The $\bQ$-structure is induced by the image 
+Let us assume convergence (Conjecture~\ref{conj:convergence}), and explain some of the other aspects of the (conjectural) variation. The $\bQ$-structure is induced by the image of the composition 
 \[
     \begin{tikzcd}
         \rH^k(X, \bQ) \ar[r, "(2 \pi i)^{k/2}"] & \rH^k(X, \bC) \ar[r, "\hat \Gamma(X) \wedge -"] & \rH^k(X, \bC),
@@ -718,11 +722,9 @@ Let us assume convergence (Conjecture~\ref{conj:convergence}), and explain some 
 where 
 \begin{align*}
     \hat\Gamma(X) &= \prod \Gamma(1 + \lambda_i) \\
-        &= \exp\left(\gamma \cdot \ch_i(T_X)) + \sum_{n \geq 2} \frac{\zeta(n)}{n} \ch_n(T_X) \right).
+        &= \exp\left(\gamma \cdot \ch_1(T_X)) + \sum_{n \geq 2} \frac{\zeta(n)}{n} \ch_n(T_X) \right).
 \end{align*}
-Here, $\lambda_i$ are the Chern roots of $T_X$.
-
-\todo{\james{What is $\gamma$?}}
+Here, $\lambda_i$ are the Chern roots of $T_X$, i.e., the total Chern class $c(T_X)$ is equal to $\prod (1 + \lambda_i)$. Note that $\gamma$ is the Euler--Mascheroni constant. 
 
 \begin{conjecture}[Gamma conjecture]
     For this specific $\bQ$-structure, the $\bQ$-structure axioms and opposedness axioms for a variation of nc-Hodge structure are satisfied.
@@ -730,21 +732,21 @@ Here, $\lambda_i$ are the Chern roots of $T_X$.
 
 \subsection*{B-model nc-Hodge structures}
 
-We now explain the B-model nc-Hodge structure associated to a Landau--Ginzburg model: $Y$ is smooth and quasi-projective over $\bC$, and $w:Y \to \bA^1$ is a function such that $\Crit(f)$ is proper. 
+We now explain the B-model nc-Hodge structure associated to a Landau--Ginzburg model: $Y$ is smooth and quasi-projective over $\bC$, and $w:Y \to \bA^1$ is a function such that $\Crit(w)$ is proper. 
 
 The twisted de Rham cohomology is 
 \[
     \cH = \rR \Gamma(Y, \Omega_Y^\bullet[u], ud - (dw \wedge-))
 \]
-It is a difficult theorem of Sabbah et. al. that this is a $\bZ/2$-graded vector bundle over $\bA^1$. The connection is the Gauss--Manin connection
+It is a difficult theorem of Sabbah and others that this is a $\bZ/2$-graded vector bundle over $\bA^1$. The connection is the Gauss--Manin connection
 \[
     \nabla = \partial_u - \frac{w}{u^2}.
 \]
 Finally, the $\bQ$-structure is given by \emph{rapid decay cohomology}: 
 \[
-    E_{\theta} = \rH^*(Y, w^{-1}(Y_{\theta})).
+    E_{\theta} = \rH^*(Y, w^{-1}(p_{\theta})).
 \]
-Here, $\theta$ is an angle, and $w^{-1}(Y_{\theta})$ is a fiber over a point of angle $\theta$, sufficiently far from the origin. 
+Here, $\theta$ is an angle, and $p_{\theta}$ is a point of angle $\theta$, sufficiently far from the origin. 
 
 \begin{conjecture}
     With the data above, one has a nc-Hodge structure. 
@@ -767,7 +769,7 @@ Using nc-Hodge structures, one obtains a precise version of mirror symmetry:
 The fact that either side is an nc-Hodge structure in the first place is conjectural, as indicated above.
 
 \begin{remark}
-    Under the conjecture, the critical values $\Crit(f)$ correspond to the eigenvalues of the quantum operator $K$. 
+    Under the conjecture, the critical values $\Crit(w)$ correspond to the eigenvalues of the quantum operator $K$. 
 \end{remark}
 
 
@@ -786,7 +788,7 @@ The main takeaway is the following series of implications:
         \textrm{Decomposition of classical Hodge structures of } X
     \end{tikzcd}
 \]
-You might say this is on very shaky ground, since it is built on a web of difficult conjectures. To return to firmer (and more scientific) ground, we discard the categorical point of view and working directly with differential equations. 
+You might say this is on very shaky ground, since it is built on a web of difficult conjectures. To return to firmer (and more scientific) ground, we discard the categorical point of view and work directly with differential equations. 
 
 
 
@@ -815,20 +817,18 @@ Comments:
 
 \begin{definition}
 \label{def:vanishing_cycle_decomposition}
-    A \emph{vanishing cycle decomposition} of $F$ is a collection of finite-dimensional $\bQ$-vector spaces $U_1, \dots, U_n$, and a collection of maps $T_{i j}:U_i \to U_j$. Here, $U_i = F_{c_0}/F_{c_i}$, where we have chosen some points $c_0, c_1, \dots, c_n$.
+    A \emph{vanishing cycle decomposition} of a perverse sheaf $F$ on $\bA^1$ is a collection of finite-dimensional $\bQ$-vector spaces $U_1, \dots, U_n$, and a collection of maps $T_{i j}:U_i \to U_j$. Here, $U_i = F_{c_0}/F_{c_i}$, where we have some points $c_0, c_1, \dots, c_n$ in $\bA^1$.\footnote{This is a generalization of the standard description of a perverse disc on $\bA^1$, perverse with respect to the stratification $\{0\} \subset \bA^1$, in terms of a pair of vector spaces with maps between them satisfying certain conditions.}
 \end{definition}
 
 
-
-\todo{\james{Incomplete. This is supposed to be the generalization of the classical picture of a perverse sheaf on a disc.}}
 
 \begin{theorem}[Analytic decomposition theorem, KKP]
 \label{thm:analytic_decomposition_theorem}
     An nc-Hodge structure of exponential type is equivalent to the following data:
     \begin{itemize}
         \item a finite set $\{c_1, \dots, c_n\} \subset \bC$
-        \item a collection of nc-Hodge structures $(H_i, E_B, \mathrm{iso})$, $i = 1, \dots, n$
-        \item Gluing data and maps $T_{ij}: (E_{B, j})_{c_o} \to (E_{B, i})_{c_0}$.
+        \item a collection of nc-Hodge structures $(\rH_i, \cE_B, \mathrm{iso})$, $i = 1, \dots, n$
+        \item Gluing data: paths $c_0 \leadsto c_i$ and maps $T_{ij}: (\cE_{B, j})_{c_o} \to (\cE_{B, i})_{c_0}$.
     \end{itemize}
 \end{theorem}
 
@@ -840,11 +840,11 @@ Comments:
 
 From here on out, there will be no more conjectures---only theorems. The idea here is to ignore both $\bQ$-structure and issues of convergence. It turns out that the trick for this is to work over a non-archimedean field. 
 
-We begin with a smooth rigid $k$-analytic variety, where $k$ is an algebraically closed non-archimedean field. Let $\bD$ be the germ of $0 \in \bA^1_u$.
+We begin with a smooth rigid $\bk$-analytic variety $B$, where $\bk$ is an algebraically closed non-archimedean field. Let $\bD$ be the germ of $0 \in \bA^1_u$.
 
 \begin{definition}
 \label{def:f_bundle}
-    An \emph{F-bundle} $(H, \nabla)/B$ consists of a vector bundle $H$ over $B \times \bD$ with a meromorphic flat connection $\nabla$, such that:
+    An \emph{F-bundle} $(\rH, \nabla)/B$ consists of a vector bundle $H$ over $B \times \bD$ with a meromorphic flat connection $\nabla$, such that:
     \begin{enumerate} [label = (\arabic*)]
          \item $\nabla_{\partial_u}$ has a pole of order $\leq 2$ along $u = 0$,
          \item For any tangent vector field $\xi$ in $B$, $\nabla_{\xi}$ has a pole of order $\leq 1$ along $u = 0$.
@@ -870,23 +870,25 @@ Here is an example:
 
 For any $b \in B$, we obtain a map
 \begin{equation*}
-    \mu_b:T_b B \to \End(H_{b, 0}), \quad v \mapsto \nabla_{uv}|_{H_{b, 0}}
+    \mu_b:T_b B \to \End(\rH_{b, 0}), \quad v \mapsto \nabla_{uv}|_{\rH_{b, 0}}
 \end{equation*}
-Flat implies that the image consists of commuting operators. 
+Flatness of the connection implies that the image consists of commuting operators. 
 
 \begin{definition}
 \label{def:overmaximal}
-    An F-bundle $(H, D)$ is \emph{overmaximal} (resp., \emph{maximal}) at $b \in B$ if there exists $h \in H_{b, 0}$ such that 
+    An F-bundle $(\rH, \nabla)/B$ is \emph{overmaximal} (resp., \emph{maximal}) at $b \in B$ if there exists $h \in \rH_{b, 0}$ such that 
     \[
-        T_b B \to H_{b, 0}, \quad v \mapsto \mu_b(v)h
+        T_b B \to \rH_{b, 0}, \quad v \mapsto \mu_b(v)h
     \]
-    is an epimorphisms (resp., isomorphism).
+    is an epimorphism (resp., isomorphism).
 \end{definition}
 
-If the F-bundle is maximal, then there is a commutative product on the tangent bundle $TB$ given by
+If an F-bundle $(\rH, \nabla)/B$ is maximal, then there is a commutative product on the tangent bundle $TB$ given by
 \[
-    \mu_b(v_1 \star v_2) = \mu_b(v_2) \circ \mu_b(v_1)(h) \quad \textrm{quantum product in A-model}
+    \mu_b(v_1 \star v_2) = \mu_b(v_2) \circ \mu_b(v_1)(h).
 \]
+For example, the quantum product in the A-model arises in such a way. 
+
 We also obtain an Euler vector field $\euler$ on $B$, such that 
 \[
     \mu_b(\euler) = K_b = \nabla_{u^2 \partial_u}|_{u = 0}.
@@ -902,21 +904,22 @@ Here, $K_b$ is the same $K$ as in quantum cohomology.
 
 \subsection{Nonarchimedean decomposition theorem}
 
-Let $(H, \nabla)/B$ be a maximal F-bundle, and let $b \in B$ be a point. At $b$, there is a generalized eigenspace decomposition
-\begin{equation}
-\label{eq:eigenspace}
-    H_{b, 0} = \bigoplus E_i.
-\end{equation}
+
 
 \begin{theorem}[Nonarchimedean decomposition theorem]
 \label{thm:nonarch_dec_thm}
-    Then $(H, \nabla)/B$ locally splits into a product of maximal F-bundles $(H_i, \nabla)/B_i$, extending \eqref{eq:eigenspace}.
+    Let $(\rH, \nabla)/B$ be a maximal F-bundle, and let $b \in B$ be a point. At $b$, consider the generalized eigenspace decomposition
+    \begin{equation}
+    \label{eq:eigenspace}
+        \rH_{b, 0} = \bigoplus E_i.
+    \end{equation}
+    Then $(\rH, \nabla)/B$ locally splits into a product of maximal F-bundles $(\rH_i, \nabla)/B_i$, extending \eqref{eq:eigenspace}.
 \end{theorem}
 
 
 
 \begin{remark}[Comparison]
-    It is possible to make a comparison with the vanishing cycle decomposition for nc-Hodge structures. One can show that there is a choice of paths from $c_i$ to $c_0$, such that the associated vanishing cycle decomposition 
+    It is possible to make a comparison with the vanishing cycle decomposition for nc-Hodge structures. The vanishing cycle decomposition relies on a choice of paths, and apparently one should take so-called \emph{Gabrielov paths}.
 \end{remark}
 
 
@@ -932,36 +935,38 @@ Let $X$ be smooth, projective over $\bC$, $Z \subset X$ a smooth subvariety of p
 \]
 One goal might be to extend this to a decomposition of nc-Hodge structures. But this is too conjectural, so we instead try to extend it to a decomposition of F-bundles. 
 
-First, we need to care of curve classes, since these are part of the coefficients of F-bundles. To simplify notation, let
-
-\subsection*{Iritani's theorem}
-
-\begin{align*}
-    \bQ[Q] &= \bQ[[\mathrm{NE}(X, Z)]] = \bQ[[Q^d, d \in \mathrm{NE}(X, Z)]] \\
-    \bQ[\cQ] &= \bQ[[Q^d, xy^{-1}, Q^{\phi_* \tilde d}y^{-[E]\tilde d}:d \in \mathrm{NE}(X, \bZ), \tilde d \in \mathrm{NE}(\tilde X, \bZ)]] \\
-    \bQ[[\tilde Q]] &= \bQ[[\mathrm{NE}(\tilde X, \bZ)]] \\
-    \bQ[[Q_Z]] &= \bQ[[\mathrm{NE}(Z, \bZ)]]
+First, we need to care of curve classes, since these are part of the coefficients of F-bundles. To simplify notation, let:\footnote{\james{In the first line, $\mathrm{NE}(X, Z)$ was written on the board, but after checking Iritani's paper, I think that $\mathrm{NE}(X, \bZ)$ was intended.}}
+\begin{align*} 
+    \bQ[Q] &= \bQ\llbracket \mathrm{NE}(X, \bZ) \rrbracket = \bQ \llbracket Q^d, d \in \mathrm{NE}(X, \bZ)\rrbracket \\
+    \bQ[\cQ] &= \bQ\llbracket Q^d, xy^{-1}, Q^{\phi_* \tilde d}y^{-[E]\tilde d}:d \in \mathrm{NE}(X, \bZ), \tilde d \in \mathrm{NE}(\tilde X, \bZ)\rrbracket \\
+    \bQ\llbracket\tilde Q\rrbracket &= \bQ\llbracket\mathrm{NE}(\tilde X, \bZ)\rrbracket \\
+    \bQ\llbracket Q_Z\rrbracket &= \bQ\llbracket\mathrm{NE}(Z, \bZ)\rrbracket
 \end{align*}
 
 Here $\mathrm{NE}(X, Z)$ are the effective curve classes supported on $Z$, etc.
 
-From embedding everything into $\mathrm{Bl}_{Z \times 0}(X \times \bP^1)$, we get embeddings:
+\subsection*{Iritani's theorem} 
+By embedding everything into $\mathrm{Bl}_{Z \times 0}(X \times \bP^1)$, we can get embeddings: 
 \begin{align*}
-    \bQ[[Q]] &\to \bQ((q^{-1/5}))[[\cQ]] \quad s = \begin{cases}
+    \bQ\llbracket Q\rrbracket  &\to \bQ((q^{-1/s}))\llbracket \cQ\rrbracket  \quad \textrm{in the obvious way}
+     \\ 
+    \bQ\llbracket \tilde Q\rrbracket  
+        &\to \bQ((q^{-1/s}))\llbracket \cQ \rrbracket, \quad \tilde Q^{\tilde d} \mapsto Q^{\phi_* d} q^{-[E] \tilde d} \\
+    \bQ\llbracket Q_Z\rrbracket  &\to \bQ((q^{-1/s}))\llbracket \cQ \rrbracket, 
+        \quad Q^d_Z \mapsto Q^d_Z \mapsto Q^{\varphi_*d} q^{-c_1(N_{Z/X})d/(r - 1)} \\
+    s &= \begin{cases}
         r - 1 & r \equiv 0 \mod 2\\
         2(r - 1) & r \equiv 1 \mod 2
-    \end{cases} \\
-    \bQ[[\tilde Q]] &\to \bQ((q^{-1/5}))[\cQ] & \tilde Q^{\tilde d} \mapsto Q^{\phi_* d} q^{-[E] \tilde d} \\
-    \bQ[[Q_Z]] &\to \bQ((q^{-1/5}))[\cQ], \quad Q^d_Z \mapsto Q^d_Z \mapsto Q^{\varphi_*d} q^{-c_1(N_{Z/X})d/(r - 1)}
+        \end{cases}
 \end{align*}
 
 \begin{theorem}[Iritani]
 \label{thm:iritani}
-    After pullback to $\bC((q^{-1/5}))[[\cQ]]$, there exists a formal invertible change of variavles
+    After pullback to $\bC((q^{-1/5}))\llbracket \cQ \rrbracket$, there exists a formal invertible change of variavles
     \[
-        \rH^*(\tilde X) \mapsto \rH^*(X) \oplus \rH^*(Z)^{\oplus r - 1}, \quad \tau \mapsto (\tau(\tilde \tau)), \{\zeta_j \cdot (\tilde \tau)\}_{0 \leq j \leq r - 2}
+        \rH^*(\tilde X) \mapsto \rH^*(X) \oplus \rH^*(Z)^{\oplus r - 1}, \quad \tilde \tau \mapsto (\tau(\tilde \tau)), \{\zeta_j (\tilde \tau)\}_{0 \leq j \leq r - 2}
     \]
-    defined over $\bC((q^{-1/5}))[[\cQ]]$, and an isomorphism of formal F-bundles
+    defined over $\bC((q^{-1/s}))\llbracket \cQ\rrbracket$, and an isomorphism of formal F-bundles
     \[
         (H_{\tilde X}, \nabla_{\tilde X}) \simeq \tau^*(H_X, \nabla_X) \oplus_{j = 0}^{r - 2} \zeta^*_j(H_Z, \nabla_Z)
     \]
@@ -971,18 +976,18 @@ This is a really interesting theorem, and is a ``packaged'' way of answering the
 
 \subsection*{Non-archimedean F-bundles}
 
-Consider $(\tilde H, \tilde \nabla)/\tilde B^{\max}$ for $\tilde X$, $(H', \nabla')_{B^{',\max}}$. Here,
+Back to our nonarchimedean setup. Consider the nonarchimedean A-model F-bundle $(\tilde \rH, \tilde \nabla)/\tilde B^{\max}$ for the blowup $\tilde X$, and the similarly the F-bundle $(\rH', \nabla')_{B^{',\max}}$ for the disjoint union
 \[
-    X' = X \sqcup_{r - 1} \bigsqcup Z.
+    X' = X \amalg \coprod_{i = 1}^{r - 1} Z.
 \]
 
 
-\begin{theorem}
-There exists unique isomorphism of maximal F-bundles between $(\tilde X, \tilde \nabla)$ and $(H', \nabla')$ over an analytic domain $(\tilde U)$ in $\tilde B^{\max}$, and the analytic domain $U'$ in $B^{',\max}$. The union of different choices of $\tilde U$ is connected and nonempty; same for $U'$.
+\begin{theorem}[Blowup formula]
+There exists a unique isomorphism of maximal F-bundles between $(\tilde \rH, \tilde \nabla)$ and $(\rH', \nabla')$ over an analytic domain $\tilde U$ in $\tilde B^{\max}$, and the analytic domain $U'$ in $B^{',\max}$. The union of different choices of $\tilde U$ is connected and nonempty; same for $U'$.
 \end{theorem}
 
-\begin{remark}[$B^{\max}$]
-    When $X$ is smooth, projective, we had a formal base $B_{\mathrm{formal}}$ for the variation of nc-Hodge structure. For $B^{\max}$, we first consider let $k$ be a non-archimedean base field. Then we consider $\rH^2(X, k^*)$, which has a valuation map to $\rH^2(X, \bR)$ (taking the valuation of the coefficient). In $\rH^2(X, \bR)$, one has the ample cone. The preimage in $\rH^2(X, k^*)$ is denoted $B^2$. Then 
+\begin{remark}[Defining $B^{\max}$]
+    When $X$ is smooth, projective, we had a formal base $B_{\mathrm{formal}}$ for the variation of nc-Hodge structure. For $B^{\max}$, we first consider let $\bk$ be a non-archimedean base field. Then we consider $\rH^2(X, \bk^*)$, which has a valuation map to $\rH^2(X, \bR)$ (taking the valuation of the coefficient). In $\rH^2(X, \bR)$, one has the ample cone. The preimage in $\rH^2(X, \bk^*)$ is denoted $B^2$. Then 
     \[
     B^{\max} = B^2 \times (\textrm{open unit disc in all } t_i : \deg t_i \neq 2  ).
     \]
@@ -993,7 +998,7 @@ There exists unique isomorphism of maximal F-bundles between $(\tilde X, \tilde 
 \section{Atoms} % (fold)
 \label{sec:atoms}
 
-Here, the goal is to relate F-bundles with motives. We will work with three different fields. First, $K$ is any field; we will work with varieties over $K$. Then we consider $k$, which has characteristic $0$; it will be the coefficient field of the cohomology theory. Finally, we will consider an algebraically closed nonarchimedean field, $\bk$. \james{Previously, this was denoted $k$. Sorry!}
+Here, the goal is to relate F-bundles with motives. We will work with three different fields. First, $K$ is any field; we will work with varieties over $K$. Then we consider $k$, which has characteristic $0$; it will be the coefficient field of the cohomology theory (e.g., $\bQ$ is fine). Finally, we will consider an algebraically closed nonarchimedean field, $\bk$. 
 
 Let $\cC$ be a semisimple neutral Tannakian category over $k$, so that $\cC = \mathrm{Rep}(G)$, for $G$ a pro-reductive group. Assume that $G$ has a central element $\epsilon \in G$ of order $2$. Let $\rH^*$ be a Weil cohomology theory of projective $K$-varieties, taking values in $\cC$, satisfying a \emph{Mumford--Tate normalization} condition: 
 \begin{enumerate} [label = (\arabic*)]
@@ -1002,14 +1007,16 @@ Let $\cC$ be a semisimple neutral Tannakian category over $k$, so that $\cC = \m
 \end{enumerate}
 
 \begin{example}
+\label{ex:mumford-tate}
     Let $k = \bQ$, $\cC_0$ be the category of pure, polarizable $\bQ$-Hodge structures. Then $\cC_0 = \mathrm{Rep}(G_0)$, where $G_0$ is the Mumford--Tate group. There is a natural homomorphism from $G_0$ to $\bG_m$ corresponding to the action of $G_0$ on $\rH^2(\bP^1)$; the kernel $G$ satisfies the conditions above. Then $\epsilon$ comes from the Deligne torus. 
 \end{example}
 
 \begin{example}
+\label{ex:motivated-cycle}
     One can take $C = \mathrm{Rep}(G)$ to be Andre's category of motivated cycles (so $\rH^*(X)^G$ is the subgroup spanned by motivated cycles).
 \end{example}
 
-\subsection*{The proof}
+\subsection{The general cubic fourfold is irrational}
 
 \begin{definition}
 Let $B$ be the germ of a smooth $\bk$-analytic space at a rigid point (a point corresponding to a maximal ideal). A $G$-equivariant maximal $F$-bundle is called a $G$-atom if the action by the Euler field $\euler$ has a single eigenvalue. ($\euler$ is the residue of the second order pole of the connection.)
@@ -1019,42 +1026,97 @@ Two $G$-atoms are \emph{equivalent} if they come from a $G$-equivariant $F$-bund
 
 For any $G$-equivariant maximal F-bundle $(H, \nabla)/B$, then we consider the locus $B_0 \subset B^G$ where the number of distinct eigenvalues of $\euler$ is maximal. Finally, we apply Theorem~\ref{thm:nonarch_dec_thm}: Consider the finite \'etale covering $\bB \to B_0$. Then each connected component of $\bB$ gives an equivalence class of $G$-atom. 
 
-We can look at a coarser invariant. Each $G$-atom gives an isomorphism class of finite-dimensional $G$-representation. 
+We will ultimately look at a coarser invariant. Each $G$-atom gives an isomorphism class of finite-dimensional $G$-representation. 
 
-Let $G$ be in examples $1$ or $2$. Then $G$ acts on non-archimedean $A$-model $F$-bundle $(H, \nabla)/B$ associated to a smooth, projective variety $X$, $\Atom(X)$. The blowup decomposition theorem says that
-\[
-    \Atom(\tilde X) = \Atom(X) + \sum_{r - 1} \Atom(Z).
-\]
-This is a sum of multisets. 
+Let $G$ be as in \Cref{ex:mumford-tate} or \Cref{ex:motivated-cycle}. 
+Then $G$ acts on nonarchimedean $A$-model $F$-bundle $(H, \nabla)/B$ associated to a smooth, projective variety $X$. 
+
+\begin{definition}
+\label{def:atoms}
+    Let $\Atoms(X)$ be the multiset of equivalence classes of $G$-atoms from the nonarchimedean A-model F-bundle $(\rH, \nabla)$. 
+\end{definition}
+
+The blowup decomposition theorem says that
+\begin{equation}
+\label{blowup_atoms}
+    \Atoms(\tilde X) = \Atoms(X) + \sum_{r - 1} \Atoms(Z).
+\end{equation}
+To emphasize, this is a sum of multisets. It just means that elements of the multiset $\Atoms(Z)$ are added, with multiplicity, to the multiset $\Atoms(X)$.
 
 \begin{theorem}
 \label{thm:main_theorem}
-    If $K_X$ is nef, then $\Atom(X)$ is a singleton. 
+    If $K_X$ is nef, then $\Atoms(X)$ is a singleton. 
 \end{theorem}
 
-Consider a general cubic $4$-fold. The eigenvalues of $\euler$ at a specific point are given by:
-\begin{equation*}
-    \begin{array}{ccc}
-        & 1 & \\
-        & 1 & \\
-        & 1 & \\
+Consider a general cubic $4$-fold. 
+Here, general means that $\rH^4_{\prim}(X)$ does not contain any Hodge classes; we will show that all of these are irrational.
+The Hodge diamond of $X$ has the following form:
+\[
+    \underbrace{\begin{array}{ccc}
         & 1 \\
-        & 1
-    \end{array} + \begin{array}{ccc}
+        & 1 \\
+        1 & 21 & 1 \\
+        & 1 \\
+        & 1 
+    \end{array}}_{\rH^*(X)} =
+    \underbrace{\begin{array}{ccccc}
+       & & 1 \\
+       & & 1 \\
+       & & 1 & & \\
+       & & 1 \\
+       & & 1 
+    \end{array}}_{\rH^*(\bP^5)|_{X}} \quad + \quad \underbrace{\begin{array}{ccc}
         \\
         \\
-        1 & 22 & 1 \\
+        1 & 20 & 1 \\
         \\
         &
-    \end{array}
-\end{equation*}
-$\dim V = 24$, $\dim V^G = 2$. This is computed at a specific point. 
-
-When we go to a general point, $V$ may split further into $V' \oplus \cdots$. But
-\[
-    \dim V'^{p - q = 2} \geq 1, \quad \dim V'^G \leq 2.
+    \end{array}}_{\rH^4_{\prim}(X)}
 \]
-But the claim is that such a $V'$ does not appear in the F-bundle of any variety $S$ with $\dim S \leq 2$. This is because for surfaces with $h^{2,0} \neq 0$, there is a birational model with $K_S$ nef. Then $\Atom(S)$ is a singleton, and $\dim V'^G \geq 3$.
+Here, we have written $\rH^*(X) = \rH^*(\bP^4) + \rH^4_{\prim}(X)$. 
+
+A classical computation of Givental (for some special parameters) shows that the spectrum of $\euler$ has the following shape:
+\begin{equation*}
+    \underbrace{\begin{array}{ccccccc}
+        & & 1 & \\
+        \\
+        & & 24 \\
+        1 & & & & 1
+    \end{array}}_{\rH} =  \underbrace{\begin{array}{ccccccc}
+        & & 1 & \\
+        \\
+        & & 2 \\
+        1 & & & & 1
+    \end{array}}_{\rH^*(\bP^5)|_{X}} + \underbrace{\begin{array}{ccccccc}
+        & & 0 & \\
+        \\
+        & & 22 \\
+        0 & & & & 0
+    \end{array}}_{\rH^4(X)_{\prim}}
+\end{equation*}
+Here, the displayed numbers refer to the dimensions of eigenspaces, and the position of each number is supposed to indicate the corresponding eigenvalue (with $0$ at the center). For instance, on the left, $24$ refers to the dimension of the eigenspace for the eigenvalue $0$.
+
+Let $V$ be the eigenspace for the eigenvalue $0$, so $\dim V = 24$ and $\dim V^G = 2$. The eigenvalue computation above could have occured at a point $p \in B^G$ which is not contained in the locus $B_0$ where the number of eigenvalues is maximal. In other words, it could happen that as we vary parameters to move $p$ into $B_0$, $V$ splits further into some $G$-representations 
+\[
+    V = V' \oplus \cdots.
+\]
+But certainly for some $V'$ in the decomposition, we have $\dim V'^{0,2} > 0$ and $\dim V'^G \leq 2$. 
+
+
+
+The key observation is that $V'$ does not appear in the F-bundle of any variety $S$ with $\dim S \leq 2$. Indeed, such a variety must have $h^{2, 0} > 0$, hence it is a surface. But then it is known that there is a minimal model $S$ with $K_S$ nef. By \Cref{thm:main_theorem}, $\Atoms(S)$ is a singleton, so $V'$ must be the whole $G$-representation $\rH^{2*}(S)$. But $V'$ does not contain enough Hodge classes to be the even cohomology of a surface: $\dim V'^G \leq 2$.
+
+The irrationality of the cubic fourfold then follows immediately from the blowup formula for atoms, \Cref{blowup_atoms}. For instance, assuming for the sake of contradiction that $X$ is rational, one can take a roof
+\[
+    \begin{tikzcd}
+        & Y \ar[dr, "f"] \ar[dl, "g"'] \\
+        \bP^5 & & X,
+    \end{tikzcd}
+\]
+where both $f$ and $g$ are compositions of blowups at smooth centers. Applying the blowup decomposition \eqref{blowup_atoms} for $f$, we see that $\Atoms(Y)$ contains the atom corresponding to $V'$. Applying the blowup decomposition for $g$, we see that $V'$ must come from the F-bundle of a variety of dimension $\leq 2$, which we have ruled out above.
+
+
+
 
 
 
