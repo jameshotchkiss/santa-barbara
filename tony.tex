@@ -31,7 +31,9 @@
 \usepackage{stmaryrd}
 \usepackage{appendix}
 \usepackage{indentfirst}
-\usepackage{cleveref}
+
+
+
 
 %added by James
 \usepackage{tikz-cd}
@@ -65,6 +67,8 @@
 \newtheorem{reduction}[theorem]{Reduction}
 \newcommand{\Step}[1] {\medskip \noindent {\em Step #1.\/}}
 \newtheorem{situation}[theorem]{Situation}
+
+\usepackage{cleveref}
 
 \makeatletter
 \newtheoremstyle{italicsname}% <name>
@@ -498,10 +502,12 @@
 
 \begin{document}
 
+
+
 \title{F-bundles and blowups}
 
-\author{Tony Yue Yu \\
-Notes by James Hotchkiss}
+\author[Tony Yue Yu]{Tony Yue Yu 
+\\ Notes by James Hotchkiss}
 
 %\thanks{A.P. was partially supported by NSF grants DMS-2112747, DMS-2052750, and DMS-2143271, and a Sloan Research Fellowship.} 
 
@@ -513,8 +519,7 @@ Notes by James Hotchkiss}
 
 \maketitle
 
-\setcounter{tocdepth}{1}
-\tableofcontents
+
 
 \section*{Introduction} % (fold)
 \label{sec:intro}
@@ -713,7 +718,7 @@ These operators preserve the $\bZ/2$-grading.
     $(H, \nabla)$ has exponential type. 
 \end{conjecture}
 
-Let us assume convergence (Conjecture~\ref{conj:convergence}), and explain some of the other aspects of the (conjectural) variation. The $\bQ$-structure is induced by the image of the composition 
+Let us assume convergence (\Cref{conj:convergence}), and explain some of the other aspects of the (conjectural) variation. The $\bQ$-structure is induced by the image of the composition 
 \[
     \begin{tikzcd}
         \rH^k(X, \bQ) \ar[r, "(2 \pi i)^{k/2}"] & \rH^k(X, \bC) \ar[r, "\hat \Gamma(X) \wedge -"] & \rH^k(X, \bC),
@@ -1024,7 +1029,7 @@ Let $B$ be the germ of a smooth $\bk$-analytic space at a rigid point (a point c
 Two $G$-atoms are \emph{equivalent} if they come from a $G$-equivariant $F$-bundle over a connected base (a connected smooth $\bk$-analytic space).
 \end{definition}
 
-For any $G$-equivariant maximal F-bundle $(H, \nabla)/B$, then we consider the locus $B_0 \subset B^G$ where the number of distinct eigenvalues of $\euler$ is maximal. Finally, we apply Theorem~\ref{thm:nonarch_dec_thm}: Consider the finite \'etale covering $\bB \to B_0$. Then each connected component of $\bB$ gives an equivalence class of $G$-atom. 
+For any $G$-equivariant maximal F-bundle $(H, \nabla)/B$, then we consider the locus $B_0 \subset B^G$ where the number of distinct eigenvalues of $\euler$ is maximal. Finally, we apply \Cref{thm:nonarch_dec_thm}: Consider the finite \'etale covering $\bB \to B_0$. Then each connected component of $\bB$ gives an equivalence class of $G$-atom. 
 
 We will ultimately look at a coarser invariant. Each $G$-atom gives an isomorphism class of finite-dimensional $G$-representation. 
 
